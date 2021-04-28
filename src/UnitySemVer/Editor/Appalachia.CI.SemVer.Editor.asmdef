@@ -1,9 +1,9 @@
 {
-    "name": "Artees.SemanticVersioning.Editor",
+    "name": "Appalachia.CI.SemVer.Editor",
+    "rootNamespace": "",
     "references": [
         "GUID:c7f2f2911de381941be7186214305448"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -13,5 +13,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }

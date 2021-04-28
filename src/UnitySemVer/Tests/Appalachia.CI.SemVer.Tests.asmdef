@@ -1,5 +1,6 @@
 {
-    "name": "Artees.UnitySemVer.Tests",
+    "name": "Appalachia.CI.SemVer.Tests",
+    "rootNamespace": "",
     "references": [
         "GUID:c7f2f2911de381941be7186214305448",
         "GUID:27619889b8ba8c24980f49ee34dbb44a",
