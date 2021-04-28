@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Artees.UnitySemVer.Editor
+namespace Appalachia.CI.SemVer.Editor
 {
     [CustomPropertyDrawer(typeof(SemVer))]
     internal class SemVerDrawer : PropertyDrawer
@@ -12,22 +12,30 @@ namespace Artees.UnitySemVer.Editor
         private float _yMin;
         private Rect _position;
 
-        protected SemVer Target { private get; set; }
-        protected bool DrawAutoBuildPopup { private get; set; }
-
         public SemVerDrawer()
         {
             DrawAutoBuildPopup = true;
         }
 
+        protected SemVer Target { private get; set; }
+        protected bool DrawAutoBuildPopup { private get; set; }
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var targetObject = property.serializedObject.targetObject;
             var source = fieldInfo.GetValue(targetObject) as SemVer;
-            if (source == null) return;
+            if (source == null)
+            {
+                return;
+            }
+
             Target = source.Clone();
             var corrected = DrawSemVer(position, property, label);
-            if (corrected == source && corrected.autoBuild == source.autoBuild) return;
+            if ((corrected == source) && (corrected.autoBuild == source.autoBuild))
+            {
+                return;
+            }
+
             EditorUtility.SetDirty(targetObject);
             fieldInfo.SetValue(targetObject, corrected);
         }
@@ -36,9 +44,12 @@ namespace Artees.UnitySemVer.Editor
         {
             InitPosition(position);
             label.text = $"{label.text} {Target}";
-            property.isExpanded =
-                EditorGUI.Foldout(GetNextPosition(), property.isExpanded, label.text, true);
-            if (!property.isExpanded) return Target;
+            property.isExpanded = EditorGUI.Foldout(GetNextPosition(), property.isExpanded, label.text, true);
+            if (!property.isExpanded)
+            {
+                return Target;
+            }
+
             EditorGUI.indentLevel++;
             CreateMajorField();
             CreateMinorField();
@@ -68,21 +79,30 @@ namespace Artees.UnitySemVer.Editor
         {
             const string label = SemVerTooltip.Major;
             Target.major = CreateCoreField(label, Target.major);
-            if (CreateIncrementButton(label)) Target.IncrementMajor();
+            if (CreateIncrementButton(label))
+            {
+                Target.IncrementMajor();
+            }
         }
 
         private void CreateMinorField()
         {
             const string label = SemVerTooltip.Minor;
             Target.minor = CreateCoreField(label, Target.minor);
-            if (CreateIncrementButton(label)) Target.IncrementMinor();
+            if (CreateIncrementButton(label))
+            {
+                Target.IncrementMinor();
+            }
         }
 
         private void CreatePatchField()
         {
             const string label = SemVerTooltip.Patch;
             Target.patch = CreateCoreField(label, Target.patch);
-            if (CreateIncrementButton(label)) Target.IncrementPatch();
+            if (CreateIncrementButton(label))
+            {
+                Target.IncrementPatch();
+            }
         }
 
         private uint CreateCoreField(string label, uint version)
@@ -119,7 +139,11 @@ namespace Artees.UnitySemVer.Editor
             position.x += _position.width - IncrementButtonWidth;
             var content = new GUIContent("+", SemVerTooltip.Increment[version]);
             var isClicked = GUI.Button(position, content);
-            if (isClicked) GUI.FocusControl(buttonName);
+            if (isClicked)
+            {
+                GUI.FocusControl(buttonName);
+            }
+
             return isClicked;
         }
 
@@ -166,7 +190,11 @@ namespace Artees.UnitySemVer.Editor
         private SemVer Validate()
         {
             var result = Target.Validate();
-            if (result.IsValid) return Target;
+            if (result.IsValid)
+            {
+                return Target;
+            }
+
             foreach (var message in result.Errors)
             {
                 EditorGUILayout.HelpBox(message, MessageType.Warning);

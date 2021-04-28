@@ -2,19 +2,39 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Artees.UnitySemVer
+namespace Appalachia.CI.SemVer
 {
     internal class SemVerComparer : IComparer<SemVer>
     {
         public int Compare(SemVer x, SemVer y)
         {
-            if (ReferenceEquals(x, y)) return 0;
-            if (ReferenceEquals(null, y)) return 1;
-            if (ReferenceEquals(x, null)) return -1;
+            if (ReferenceEquals(x, y))
+            {
+                return 0;
+            }
+
+            if (ReferenceEquals(null, y))
+            {
+                return 1;
+            }
+
+            if (ReferenceEquals(x, null))
+            {
+                return -1;
+            }
+
             var majorComparison = x.major.CompareTo(y.major);
-            if (majorComparison != 0) return majorComparison;
+            if (majorComparison != 0)
+            {
+                return majorComparison;
+            }
+
             var minorComparison = x.minor.CompareTo(y.minor);
-            if (minorComparison != 0) return minorComparison;
+            if (minorComparison != 0)
+            {
+                return minorComparison;
+            }
+
             var patchComparison = x.patch.CompareTo(y.patch);
             return patchComparison != 0 ? patchComparison : ComparePreReleaseVersions(x, y);
         }
@@ -23,7 +43,10 @@ namespace Artees.UnitySemVer
         {
             if (IsPreRelease(x))
             {
-                if (!IsPreRelease(y)) return -1;
+                if (!IsPreRelease(y))
+                {
+                    return -1;
+                }
             }
             else
             {
@@ -37,7 +60,11 @@ namespace Artees.UnitySemVer
             {
                 var xIdentifier = xIdentifiers[i];
                 var yIdentifier = yIdentifiers[i];
-                if (Equals(xIdentifier, yIdentifier)) continue;
+                if (Equals(xIdentifier, yIdentifier))
+                {
+                    continue;
+                }
+
                 return ComparePreReleaseIdentifiers(xIdentifier, yIdentifier);
             }
 

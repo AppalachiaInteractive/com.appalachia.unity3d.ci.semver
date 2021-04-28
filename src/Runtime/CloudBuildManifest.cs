@@ -1,31 +1,33 @@
 using System;
 using UnityEngine;
 
-namespace Artees.UnitySemVer
+namespace Appalachia.CI.SemVer
 {
     /// <summary>
-    /// A parsed <a href="https://docs.unity3d.com/Manual/UnityCloudBuildManifest.html">Unity Cloud Build manifest</a>.
+    ///     A parsed <a href="https://docs.unity3d.com/Manual/UnityCloudBuildManifest.html">Unity Cloud Build manifest</a>.
     /// </summary>
     internal class CloudBuildManifest
     {
         private static CloudBuildManifest _instance;
 
-        public static CloudBuildManifest Instance => _instance ?? (_instance = new CloudBuildManifest());
-
         /// <summary>
-        /// Returns true if the manifest has been successfully loaded.
+        ///     Returns true if the manifest has been successfully loaded.
         /// </summary>
         public readonly bool IsLoaded;
 
         /// <summary>
-        /// The Unity Cloud Build “build number” corresponding to this build.
+        ///     The Unity Cloud Build “build number” corresponding to this build.
         /// </summary>
         public readonly int BuildNumber;
 
         private CloudBuildManifest()
         {
             var manifestAsset = Resources.Load<TextAsset>("UnityCloudBuildManifest.json");
-            if (manifestAsset == null) return;
+            if (manifestAsset == null)
+            {
+                return;
+            }
+
             var manifest = manifestAsset.text;
             IsLoaded = true;
             const string key = "\"buildNumber\"";
@@ -36,5 +38,7 @@ namespace Artees.UnitySemVer
             var buildNumber = manifest.Substring(valueStart, valueEnd - valueStart);
             int.TryParse(buildNumber, out BuildNumber);
         }
+
+        public static CloudBuildManifest Instance => _instance ?? (_instance = new CloudBuildManifest());
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Artees.UnitySemVer
+namespace Appalachia.CI.SemVer
 {
     internal class SemVerValidator
     {
@@ -29,7 +29,11 @@ namespace Artees.UnitySemVer
 
         private void ValidateBuild(SemVer semVer)
         {
-            if (SemVerAutoBuild.Instances[semVer.autoBuild] is SemVerAutoBuild.ReadOnly) return;
+            if (SemVerAutoBuild.Instances[semVer.autoBuild] is SemVerAutoBuild.ReadOnly)
+            {
+                return;
+            }
+
             var identifiers = ValidateIdentifiers(semVer.Build);
             var joined = JoinIdentifiers(identifiers);
             _corrected.Build = joined;
@@ -37,10 +41,14 @@ namespace Artees.UnitySemVer
 
         private string[] ValidateIdentifiers(string identifiers)
         {
-            if (string.IsNullOrEmpty(identifiers)) return new string[0];
+            if (string.IsNullOrEmpty(identifiers))
+            {
+                return new string[0];
+            }
+
             var separators = new[] {SemVer.IdentifiersSeparator};
             var strings = identifiers.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-            if (strings.Length < identifiers.Count(c => c == SemVer.IdentifiersSeparator) + 1)
+            if (strings.Length < (identifiers.Count(c => c == SemVer.IdentifiersSeparator) + 1))
             {
                 _errors.Add(SemVerErrorMessage.Empty);
             }
@@ -49,7 +57,11 @@ namespace Artees.UnitySemVer
             {
                 var raw = strings[i];
                 var corrected = Regex.Replace(raw, "[^0-9A-Za-z-]", "-");
-                if (string.Equals(raw, corrected)) continue;
+                if (string.Equals(raw, corrected))
+                {
+                    continue;
+                }
+
                 _errors.Add(SemVerErrorMessage.Invalid);
                 strings[i] = corrected;
             }
@@ -65,7 +77,7 @@ namespace Artees.UnitySemVer
             {
                 var identifier = identifiers[i];
                 var isNumeric = int.TryParse(identifier, out var numericIdentifier);
-                if (isNumeric && identifier.StartsWith("0") && identifier.Length > 1)
+                if (isNumeric && identifier.StartsWith("0") && (identifier.Length > 1))
                 {
                     corrected[i] = numericIdentifier.ToString();
                     _errors.Add(SemVerErrorMessage.LeadingZero);

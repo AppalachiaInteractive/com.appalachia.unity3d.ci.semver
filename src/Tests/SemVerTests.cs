@@ -5,7 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Artees.UnitySemVer.Tests
+namespace Appalachia.CI.SemVer.Tests
 {
     [TestFixture]
     internal class SemVerTests
@@ -46,13 +46,13 @@ namespace Artees.UnitySemVer.Tests
         {
             var original = invalid.Clone();
             var result = invalid.Validate();
-            EqualsTest(original, invalid);
+            EqualsTest(original,         invalid);
             EqualsTest(result.Corrected, corrected);
             MajorMinorPatchTest(result.Corrected);
             PreReleaseTest(result.Corrected);
             BuildTest(result.Corrected);
             var expression = result.IsValid ? new ConstraintExpression() : Does.Not;
-            Assert.That(original.ToString(), expression.Match(SuggestedRegEx.Pattern));
+            Assert.That(original.ToString(),         expression.Match(SuggestedRegEx.Pattern));
             Assert.That(result.Corrected.ToString(), Does.Match(SuggestedRegEx.Pattern));
             return result.Errors;
         }
@@ -72,7 +72,7 @@ namespace Artees.UnitySemVer.Tests
         [TestCaseSource(typeof(Data), nameof(Data.CompareTestCases))]
         public void CompareTest(SemVer big, SemVer small)
         {
-            Assert.That(big, Is.GreaterThan(small));
+            Assert.That(big,   Is.GreaterThan(small));
             Assert.That(small, Is.LessThan(big));
         }
 
@@ -115,12 +115,7 @@ namespace Artees.UnitySemVer.Tests
                 get
                 {
                     yield return new SemVer();
-                    yield return new SemVer
-                    {
-                        major = 1,
-                        minor = 2,
-                        patch = 3
-                    };
+                    yield return new SemVer {major = 1, minor = 2, patch = 3};
                     yield return new SemVer
                     {
                         major = 1,
@@ -144,24 +139,10 @@ namespace Artees.UnitySemVer.Tests
                         preRelease = "alpha",
                         Build = "CustomBuild2"
                     };
-                    yield return new SemVer
-                    {
-                        preRelease = "ALPHA"
-                    };
-                    yield return new SemVer
-                    {
-                        preRelease = "alpha.1"
-                    };
-                    yield return new SemVer
-                    {
-                        preRelease = "0.3.7",
-                        Build = "20130313144700"
-                    };
-                    yield return new SemVer
-                    {
-                        preRelease = "x.7.z.92",
-                        Build = "exp.sha.5114f85"
-                    };
+                    yield return new SemVer {preRelease = "ALPHA"};
+                    yield return new SemVer {preRelease = "alpha.1"};
+                    yield return new SemVer {preRelease = "0.3.7", Build = "20130313144700"};
+                    yield return new SemVer {preRelease = "x.7.z.92", Build = "exp.sha.5114f85"};
                     yield return new SemVer
                     {
                         major = 1,
@@ -182,64 +163,19 @@ namespace Artees.UnitySemVer.Tests
             {
                 get
                 {
-                    yield return new TestCaseData(new SemVer
-                    {
-                        preRelease = ".",
-                        Build = "."
-                    }, new SemVer()).Returns(new[]
-                    {
-                        SemVerErrorMessage.Empty,
-                        SemVerErrorMessage.Empty
-                    });
-                    yield return new TestCaseData(new SemVer
-                    {
-                        preRelease = "a..a",
-                        Build = "a..a"
-                    }, new SemVer
-                    {
-                        preRelease = "a.a",
-                        Build = "a.a"
-                    }).Returns(new[]
-                    {
-                        SemVerErrorMessage.Empty,
-                        SemVerErrorMessage.Empty
-                    });
-                    yield return new TestCaseData(new SemVer
-                    {
-                        preRelease = "a a",
-                        Build = "a a"
-                    }, new SemVer
-                    {
-                        preRelease = "a-a",
-                        Build = "a-a"
-                    }).Returns(new[]
-                    {
-                        SemVerErrorMessage.Invalid,
-                        SemVerErrorMessage.Invalid
-                    });
-                    yield return new TestCaseData(new SemVer
-                    {
-                        preRelease = "$",
-                        Build = "$"
-                    }, new SemVer
-                    {
-                        preRelease = "-",
-                        Build = "-"
-                    }).Returns(new[]
-                    {
-                        SemVerErrorMessage.Invalid,
-                        SemVerErrorMessage.Invalid
-                    });
-                    yield return new TestCaseData(new SemVer
-                    {
-                        preRelease = "01"
-                    }, new SemVer
-                    {
-                        preRelease = "1"
-                    }).Returns(new[]
-                    {
-                        SemVerErrorMessage.LeadingZero
-                    });
+                    yield return new TestCaseData(new SemVer {preRelease = ".", Build = "."}, new SemVer()).Returns(
+                        new[] {SemVerErrorMessage.Empty, SemVerErrorMessage.Empty}
+                    );
+                    yield return new TestCaseData(new SemVer {preRelease = "a..a", Build = "a..a"}, new SemVer {preRelease = "a.a", Build = "a.a"})
+                       .Returns(new[] {SemVerErrorMessage.Empty, SemVerErrorMessage.Empty});
+                    yield return new TestCaseData(new SemVer {preRelease = "a a", Build = "a a"}, new SemVer {preRelease = "a-a", Build = "a-a"})
+                       .Returns(new[] {SemVerErrorMessage.Invalid, SemVerErrorMessage.Invalid});
+                    yield return new TestCaseData(new SemVer {preRelease = "$", Build = "$"}, new SemVer {preRelease = "-", Build = "-"}).Returns(
+                        new[] {SemVerErrorMessage.Invalid, SemVerErrorMessage.Invalid}
+                    );
+                    yield return new TestCaseData(new SemVer {preRelease = "01"}, new SemVer {preRelease = "1"}).Returns(
+                        new[] {SemVerErrorMessage.LeadingZero}
+                    );
                 }
             }
 
@@ -268,7 +204,8 @@ namespace Artees.UnitySemVer.Tests
                             patch = 3,
                             preRelease = "alpha",
                             Build = "2"
-                        });
+                        }
+                    );
                 }
             }
 
@@ -289,45 +226,9 @@ namespace Artees.UnitySemVer.Tests
             {
                 get
                 {
-                    yield return new TestCaseData(
-                        new SemVer
-                        {
-                            major = 2,
-                            minor = 1,
-                            patch = 1
-                        },
-                        new SemVer
-                        {
-                            major = 2,
-                            minor = 1,
-                            patch = 0
-                        });
-                    yield return new TestCaseData(
-                        new SemVer
-                        {
-                            major = 2,
-                            minor = 1,
-                            patch = 0
-                        },
-                        new SemVer
-                        {
-                            major = 2,
-                            minor = 0,
-                            patch = 0
-                        });
-                    yield return new TestCaseData(
-                        new SemVer
-                        {
-                            major = 2,
-                            minor = 0,
-                            patch = 0
-                        },
-                        new SemVer
-                        {
-                            major = 1,
-                            minor = 0,
-                            patch = 0
-                        });
+                    yield return new TestCaseData(new SemVer {major = 2, minor = 1, patch = 1}, new SemVer {major = 2, minor = 1, patch = 0});
+                    yield return new TestCaseData(new SemVer {major = 2, minor = 1, patch = 0}, new SemVer {major = 2, minor = 0, patch = 0});
+                    yield return new TestCaseData(new SemVer {major = 2, minor = 0, patch = 0}, new SemVer {major = 1, minor = 0, patch = 0});
                     yield return new TestCaseData(
                         new SemVer
                         {
@@ -342,21 +243,18 @@ namespace Artees.UnitySemVer.Tests
                             minor = 7,
                             patch = 3,
                             preRelease = "alpha"
-                        });
+                        }
+                    );
                     yield return new TestCaseData(
-                        new SemVer
-                        {
-                            major = 1,
-                            minor = 0,
-                            patch = 0
-                        },
+                        new SemVer {major = 1, minor = 0, patch = 0},
                         new SemVer
                         {
                             major = 1,
                             minor = 0,
                             patch = 0,
                             preRelease = "rc.1"
-                        });
+                        }
+                    );
                     yield return new TestCaseData(
                         new SemVer
                         {
@@ -371,7 +269,8 @@ namespace Artees.UnitySemVer.Tests
                             minor = 0,
                             patch = 0,
                             preRelease = "beta.11"
-                        });
+                        }
+                    );
                     yield return new TestCaseData(
                         new SemVer
                         {
@@ -386,7 +285,8 @@ namespace Artees.UnitySemVer.Tests
                             minor = 0,
                             patch = 0,
                             preRelease = "beta.2"
-                        });
+                        }
+                    );
                     yield return new TestCaseData(
                         new SemVer
                         {
@@ -401,7 +301,8 @@ namespace Artees.UnitySemVer.Tests
                             minor = 0,
                             patch = 0,
                             preRelease = "beta"
-                        });
+                        }
+                    );
                     yield return new TestCaseData(
                         new SemVer
                         {
@@ -416,7 +317,8 @@ namespace Artees.UnitySemVer.Tests
                             minor = 0,
                             patch = 0,
                             preRelease = "alpha.beta"
-                        });
+                        }
+                    );
                     yield return new TestCaseData(
                         new SemVer
                         {
@@ -431,7 +333,8 @@ namespace Artees.UnitySemVer.Tests
                             minor = 0,
                             patch = 0,
                             preRelease = "alpha.1"
-                        });
+                        }
+                    );
                     yield return new TestCaseData(
                         new SemVer
                         {
@@ -446,7 +349,8 @@ namespace Artees.UnitySemVer.Tests
                             minor = 0,
                             patch = 0,
                             preRelease = "alpha"
-                        });
+                        }
+                    );
                 }
             }
 
@@ -454,18 +358,17 @@ namespace Artees.UnitySemVer.Tests
             {
                 get
                 {
-                    yield return new TestCaseData(new SemVer
-                    {
-                        major = 1,
-                        minor = 2,
-                        patch = 3,
-                        preRelease = "pr",
-                        Build = "b"
-                    }).Returns("1.2.3-pr+b");
-                    yield return new TestCaseData(new SemVer
-                    {
-                        preRelease = "pre-alpha"
-                    }).Returns("0.1.0-pre-alpha");
+                    yield return new TestCaseData(
+                        new SemVer
+                        {
+                            major = 1,
+                            minor = 2,
+                            patch = 3,
+                            preRelease = "pr",
+                            Build = "b"
+                        }
+                    ).Returns("1.2.3-pr+b");
+                    yield return new TestCaseData(new SemVer {preRelease = "pre-alpha"}).Returns("0.1.0-pre-alpha");
                 }
             }
 
@@ -473,32 +376,35 @@ namespace Artees.UnitySemVer.Tests
             {
                 get
                 {
-                    yield return new TestCaseData("1.2.3-pr+b").Returns(new SemVer
-                    {
-                        major = 1,
-                        minor = 2,
-                        patch = 3,
-                        preRelease = "pr",
-                        Build = "b"
-                    });
-                    yield return new TestCaseData("1.2.3+b").Returns(new SemVer
-                    {
-                        major = 1,
-                        minor = 2,
-                        patch = 3,
-                        Build = "b"
-                    });
-                    yield return new TestCaseData("1.2.3-pr").Returns(new SemVer
-                    {
-                        major = 1,
-                        minor = 2,
-                        patch = 3,
-                        preRelease = "pr"
-                    });
-                    yield return new TestCaseData("0.1.0-pre-alpha").Returns(new SemVer
-                    {
-                        preRelease = "pre-alpha"
-                    });
+                    yield return new TestCaseData("1.2.3-pr+b").Returns(
+                        new SemVer
+                        {
+                            major = 1,
+                            minor = 2,
+                            patch = 3,
+                            preRelease = "pr",
+                            Build = "b"
+                        }
+                    );
+                    yield return new TestCaseData("1.2.3+b").Returns(
+                        new SemVer
+                        {
+                            major = 1,
+                            minor = 2,
+                            patch = 3,
+                            Build = "b"
+                        }
+                    );
+                    yield return new TestCaseData("1.2.3-pr").Returns(
+                        new SemVer
+                        {
+                            major = 1,
+                            minor = 2,
+                            patch = 3,
+                            preRelease = "pr"
+                        }
+                    );
+                    yield return new TestCaseData("0.1.0-pre-alpha").Returns(new SemVer {preRelease = "pre-alpha"});
                 }
             }
 
@@ -506,11 +412,7 @@ namespace Artees.UnitySemVer.Tests
             {
                 get
                 {
-                    yield return new TestCaseData(new SemVer
-                    {
-                        autoBuild = SemVerAutoBuild.Type.Manual,
-                        Build = "auto-build"
-                    }).Returns("auto-build");
+                    yield return new TestCaseData(new SemVer {autoBuild = SemVerAutoBuild.Type.Manual, Build = "auto-build"}).Returns("auto-build");
                 }
             }
 
@@ -518,14 +420,16 @@ namespace Artees.UnitySemVer.Tests
             {
                 get
                 {
-                    yield return new TestCaseData(new SemVer
-                    {
-                        major = 4,
-                        minor = 5,
-                        patch = 6,
-                        preRelease = "alpha",
-                        Build = "CustomBuild3"
-                    }).Returns("4.5.6");
+                    yield return new TestCaseData(
+                        new SemVer
+                        {
+                            major = 4,
+                            minor = 5,
+                            patch = 6,
+                            preRelease = "alpha",
+                            Build = "CustomBuild3"
+                        }
+                    ).Returns("4.5.6");
                 }
             }
 
@@ -533,14 +437,16 @@ namespace Artees.UnitySemVer.Tests
             {
                 get
                 {
-                    yield return new TestCaseData(new SemVer
-                    {
-                        major = 1,
-                        minor = 2,
-                        patch = 3,
-                        preRelease = "alpha",
-                        Build = "CustomBuild4"
-                    }).Returns(10203);
+                    yield return new TestCaseData(
+                        new SemVer
+                        {
+                            major = 1,
+                            minor = 2,
+                            patch = 3,
+                            preRelease = "alpha",
+                            Build = "CustomBuild4"
+                        }
+                    ).Returns(10203);
                 }
             }
         }
