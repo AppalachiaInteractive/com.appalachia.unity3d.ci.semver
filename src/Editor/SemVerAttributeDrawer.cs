@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Appalachia.CI.SemVer.Editor
+namespace Appalachia.CI.SemVer
 {
     [CustomPropertyDrawer(typeof(SemVerAttribute))]
     internal class SemVerAttributeDrawer : SemVerDrawer

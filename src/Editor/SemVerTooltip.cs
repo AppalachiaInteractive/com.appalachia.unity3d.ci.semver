@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Appalachia.CI.SemVer.Editor
+namespace Appalachia.CI.SemVer
 {
     internal static class SemVerTooltip
     {

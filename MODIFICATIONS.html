@@ -453,46 +453,86 @@
 <pre class='delete'>--- a/README.md</pre>
 <pre class='insert'>+++ b/README.md</pre>
 <pre class='info'>@@ -1,37 +1,5 @@</pre>
-<pre class='delete'>-# Unity SemVer</pre>
-<pre class='delete'>-[![openupm](https://img.shields.io/npm/v/games.artees.semver?label=openupm&amp;registry_uri=https://package.openupm.com)](https://openupm.com/packages/games.artees.semver/)</pre>
-<pre class='insert'>+# Semver for Unity3D</pre>
-<pre class='insert'>+## com.appalachia.unity3d.ci.semver</pre>
-<pre class='insert'>+### Created by Appalachia Interactive &amp; Artees</pre>
-<pre class='context'> </pre>
-<pre class='delete'>-A convenient way to edit and compare version numbers according to the [Semantic Versioning 2.0.0](https://semver.org/) specification. Also includes a property drawer for Unity.</pre>
-<pre class='delete'>-</pre>
-<pre class='delete'>-![Property drawer](https://github.com/Artees/Unity-SemVer/raw/master/SemVerDrawer.png)</pre>
-<pre class='delete'>-</pre>
-<pre class='delete'>-# Installation</pre>
-<pre class='delete'>-Install the package **games.artees.semver** using [my package registry](https://artees.games/upm).</pre>
-<pre class='delete'>-Or install via the [OpenUPM registry](https://openupm.com/packages/games.artees.semver/).</pre>
-<pre class='delete'>-</pre>
-<pre class='delete'>-# Usage</pre>
-<pre class='delete'>-Use the `Artees.UnitySemVer.SemVer` class or apply the `Artees.UnitySemVer.SemVerAttribute` attribute to a string field.</pre>
-<pre class='delete'>-```</pre>
-<pre class='delete'>-public SemVer version = new SemVer {major = 1, minor = 2, patch = 3};</pre>
-<pre class='delete'>-[SemVer] public string versionString = "1.2.3";</pre>
-<pre class='delete'>-```</pre>
-<pre class='delete'>-</pre>
-<pre class='delete'>-Parsing:</pre>
-<pre class='delete'>-```</pre>
-<pre class='delete'>-var version = SemVer.Parse("2.0.0-rc.1+build.123");</pre>
-<pre class='delete'>-```</pre>
-<pre class='delete'>-</pre>
-<pre class='delete'>-Comparing:</pre>
-<pre class='delete'>-```</pre>
-<pre class='delete'>-Debug.Log("2.1.0"  &gt; version);</pre>
-<pre class='delete'>-```</pre>
-<pre class='delete'>-</pre>
-<pre class='delete'>-Validating:</pre>
-<pre class='delete'>-```</pre>
-<pre class='delete'>-var result = version.Validate();</pre>
-<pre class='delete'>-version = result.Corrected;</pre>
-<pre class='delete'>-foreach (var message in result.Errors)</pre>
-<pre class='delete'>-{</pre>
-<pre class='delete'>-    Debug.LogWarning(message);</pre>
-<pre class='delete'>-}</pre>
-<pre class='delete'>-```</pre>
+<pre class='delete'>-# Unity SemVer
+</pre>
+<pre class='delete'>-[![openupm](https://img.shields.io/npm/v/games.artees.semver?label=openupm&amp;registry_uri=https://package.openupm.com)](https://openupm.com/packages/games.artees.semver/)
+</pre>
+<pre class='insert'>+# Semver for Unity3D
+</pre>
+<pre class='insert'>+## com.appalachia.unity3d.ci.semver
+</pre>
+<pre class='insert'>+### Created by Appalachia Interactive &amp; Artees
+</pre>
+<pre class='context'> 
+</pre>
+<pre class='delete'>-A convenient way to edit and compare version numbers according to the [Semantic Versioning 2.0.0](https://semver.org/) specification. Also includes a property drawer for Unity.
+</pre>
+<pre class='delete'>-
+</pre>
+<pre class='delete'>-![Property drawer](https://github.com/Artees/Unity-SemVer/raw/master/SemVerDrawer.png)
+</pre>
+<pre class='delete'>-
+</pre>
+<pre class='delete'>-# Installation
+</pre>
+<pre class='delete'>-Install the package **games.artees.semver** using [my package registry](https://artees.games/upm).
+</pre>
+<pre class='delete'>-Or install via the [OpenUPM registry](https://openupm.com/packages/games.artees.semver/).
+</pre>
+<pre class='delete'>-
+</pre>
+<pre class='delete'>-# Usage
+</pre>
+<pre class='delete'>-Use the `Artees.UnitySemVer.SemVer` class or apply the `Artees.UnitySemVer.SemVerAttribute` attribute to a string field.
+</pre>
+<pre class='delete'>-```
+</pre>
+<pre class='delete'>-public SemVer version = new SemVer {major = 1, minor = 2, patch = 3};
+</pre>
+<pre class='delete'>-[SemVer] public string versionString = "1.2.3";
+</pre>
+<pre class='delete'>-```
+</pre>
+<pre class='delete'>-
+</pre>
+<pre class='delete'>-Parsing:
+</pre>
+<pre class='delete'>-```
+</pre>
+<pre class='delete'>-var version = SemVer.Parse("2.0.0-rc.1+build.123");
+</pre>
+<pre class='delete'>-```
+</pre>
+<pre class='delete'>-
+</pre>
+<pre class='delete'>-Comparing:
+</pre>
+<pre class='delete'>-```
+</pre>
+<pre class='delete'>-Debug.Log("2.1.0"  &gt; version);
+</pre>
+<pre class='delete'>-```
+</pre>
+<pre class='delete'>-
+</pre>
+<pre class='delete'>-Validating:
+</pre>
+<pre class='delete'>-```
+</pre>
+<pre class='delete'>-var result = version.Validate();
+</pre>
+<pre class='delete'>-version = result.Corrected;
+</pre>
+<pre class='delete'>-foreach (var message in result.Errors)
+</pre>
+<pre class='delete'>-{
+</pre>
+<pre class='delete'>-    Debug.LogWarning(message);
+</pre>
+<pre class='delete'>-}
+</pre>
+<pre class='delete'>-```
+</pre>
 <pre class='insert'>+Semantic Versioning 2.0 for Unity3D.</pre>
 <pre class='undefined'>\ No newline at end of file</pre></div></div><h2>README.md.meta<button class='copy' onclick='navigator.clipboard.writeText("README.md.meta")'>copy path</button></h2><div class='file-diff'><div><pre class='file'>diff --git a/README.md.meta b/README.md.meta</pre>
 <pre class='file'>index 736860d..409ce40 100644</pre>
@@ -1092,7 +1132,7 @@
 <pre class='context'> DefaultImporter:</pre>
 <pre class='context'>   externalObjects: {}</pre>
 <pre class='context'>   userData: </pre></div></div><h2>package.json<button class='copy' onclick='navigator.clipboard.writeText("package.json")'>copy path</button></h2><div class='file-diff'><div><pre class='file'>diff --git a/package.json b/package.json</pre>
-<pre class='file'>index 418ae19..4c930b4 100644</pre>
+<pre class='file'>index 418ae19..4c930b4 100635.211.123.13:4873
 <pre class='delete'>--- a/package.json</pre>
 <pre class='insert'>+++ b/package.json</pre>
 <pre class='info'>@@ -1,17 +1,36 @@</pre>

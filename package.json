@@ -4,6 +4,8 @@
   "version": "0.1.2",
   "unity": "2020.3",
   "description": "Semantic Versioning 2.0 for Unity3D.",
+    
+
   "keywords": [
     "Scripts",
     "Tool"
@@ -19,7 +21,7 @@
     "type": "git"
   },
   "publishConfig": {
-    "registry": "http://localhost:4873/"
+    "registry": "http://35.211.123.13:4873/"
   },
   "scripts": {
     "preversion": "bash ~/com.appalachia/appa/appa package unity3d preversion",
