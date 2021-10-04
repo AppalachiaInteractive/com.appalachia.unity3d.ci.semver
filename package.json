@@ -1,11 +1,9 @@
 {
   "name": "com.appalachia.unity3d.ci.semver",
   "displayName": "Semver for Unity3D",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "unity": "2020.3",
   "description": "Semantic Versioning 2.0 for Unity3D.",
-    
-
   "keywords": [
     "Scripts",
     "Tool"
