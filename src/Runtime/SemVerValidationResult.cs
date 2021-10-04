@@ -9,14 +9,14 @@ namespace Appalachia.CI.SemVer
     public class SemVerValidationResult
     {
         /// <summary>
-        ///     Error messages. This collection is empty if the version is valid.
-        /// </summary>
-        public readonly ReadOnlyCollection<string> Errors;
-
-        /// <summary>
         ///     Automatically corrected semantic version.
         /// </summary>
         public readonly SemVer Corrected;
+
+        /// <summary>
+        ///     Error messages. This collection is empty if the version is valid.
+        /// </summary>
+        public readonly ReadOnlyCollection<string> Errors;
 
         internal SemVerValidationResult(ReadOnlyCollection<string> errors, SemVer corrected)
         {

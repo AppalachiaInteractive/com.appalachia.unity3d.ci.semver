@@ -29,7 +29,11 @@ namespace Appalachia.CI.SemVer
         }
 
         public static readonly IReadOnlyDictionary<Type, SemVerAutoBuild> Instances =
-            new Dictionary<Type, SemVerAutoBuild> {{Type.Manual, new ManualBuild()}, {Type.CloudBuildNumber, new CloudBuildNumberBuild()}};
+            new Dictionary<Type, SemVerAutoBuild>
+            {
+                {Type.Manual, new ManualBuild()},
+                {Type.CloudBuildNumber, new CloudBuildNumberBuild()}
+            };
 
         internal abstract string Get(string build);
 
@@ -52,7 +56,9 @@ namespace Appalachia.CI.SemVer
         {
             internal override string Get(string build)
             {
-                return CloudBuildManifest.Instance.IsLoaded ? CloudBuildManifest.Instance.BuildNumber.ToString() : string.Empty;
+                return CloudBuildManifest.Instance.IsLoaded
+                    ? CloudBuildManifest.Instance.BuildNumber.ToString()
+                    : string.Empty;
             }
         }
 

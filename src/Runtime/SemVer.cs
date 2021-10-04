@@ -217,7 +217,7 @@ namespace Appalachia.CI.SemVer
         /// </summary>
         public SemVer Clone()
         {
-            return new SemVer
+            return new()
             {
                 major = major,
                 minor = minor,

@@ -8,9 +8,9 @@ namespace Appalachia.CI.SemVer
     internal class SemVerDrawer : PropertyDrawer
     {
         private const float IncrementButtonWidth = 40f;
+        private Rect _position;
 
         private float _yMin;
-        private Rect _position;
 
         public SemVerDrawer()
         {
@@ -44,7 +44,12 @@ namespace Appalachia.CI.SemVer
         {
             InitPosition(position);
             label.text = $"{label.text} {Target}";
-            property.isExpanded = EditorGUI.Foldout(GetNextPosition(), property.isExpanded, label.text, true);
+            property.isExpanded = EditorGUI.Foldout(
+                GetNextPosition(),
+                property.isExpanded,
+                label.text,
+                true
+            );
             if (!property.isExpanded)
             {
                 return Target;
@@ -71,7 +76,8 @@ namespace Appalachia.CI.SemVer
 
         private Rect GetNextPosition()
         {
-            _position.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            _position.y += EditorGUIUtility.singleLineHeight +
+                           EditorGUIUtility.standardVerticalSpacing;
             return _position;
         }
 
@@ -127,7 +133,7 @@ namespace Appalachia.CI.SemVer
 
         private static GUIContent CreateGuiContentWithTooltip(string label)
         {
-            return new GUIContent(label, SemVerTooltip.Field[label]);
+            return new(label, SemVerTooltip.Field[label]);
         }
 
         private bool CreateIncrementButton(string version)

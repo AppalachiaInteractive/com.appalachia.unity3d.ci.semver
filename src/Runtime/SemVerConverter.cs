@@ -4,11 +4,17 @@ namespace Appalachia.CI.SemVer
     {
         public static SemVer FromString(string semVerString)
         {
-            var strings = semVerString.Split(SemVer.IdentifiersSeparator, SemVer.PreReleasePrefix, SemVer.BuildPrefix);
+            var strings = semVerString.Split(
+                SemVer.IdentifiersSeparator,
+                SemVer.PreReleasePrefix,
+                SemVer.BuildPrefix
+            );
             var preReleaseStart = semVerString.IndexOf(SemVer.PreReleasePrefix);
             var buildIndex = semVerString.IndexOf(SemVer.BuildPrefix);
             var preReleaseEnd = buildIndex >= 0 ? buildIndex : semVerString.Length;
-            var preRelease = preReleaseStart >= 0 ? semVerString.Substring(preReleaseStart + 1, preReleaseEnd - preReleaseStart - 1) : string.Empty;
+            var preRelease = preReleaseStart >= 0
+                ? semVerString.Substring(preReleaseStart + 1, preReleaseEnd - preReleaseStart - 1)
+                : string.Empty;
             var build = buildIndex >= 0 ? semVerString.Substring(buildIndex + 1) : string.Empty;
             uint major = 0;
             if (strings.Length > 0)
@@ -41,9 +47,21 @@ namespace Appalachia.CI.SemVer
 
         public static string ToString(SemVer semVer)
         {
-            var preRelease = string.IsNullOrEmpty(semVer.preRelease) ? string.Empty : $"{SemVer.PreReleasePrefix}{semVer.preRelease}";
-            var build = string.IsNullOrEmpty(semVer.Build) ? string.Empty : $"{SemVer.BuildPrefix}{semVer.Build}";
-            return string.Format("{1}{0}{2}{0}{3}{4}{5}", SemVer.IdentifiersSeparator, semVer.major, semVer.minor, semVer.patch, preRelease, build);
+            var preRelease = string.IsNullOrEmpty(semVer.preRelease)
+                ? string.Empty
+                : $"{SemVer.PreReleasePrefix}{semVer.preRelease}";
+            var build = string.IsNullOrEmpty(semVer.Build)
+                ? string.Empty
+                : $"{SemVer.BuildPrefix}{semVer.Build}";
+            return string.Format(
+                "{1}{0}{2}{0}{3}{4}{5}",
+                SemVer.IdentifiersSeparator,
+                semVer.major,
+                semVer.minor,
+                semVer.patch,
+                preRelease,
+                build
+            );
         }
     }
 }

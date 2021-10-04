@@ -7,8 +7,8 @@ namespace Appalachia.CI.SemVer
 {
     internal class SemVerValidator
     {
-        private List<string> _errors;
         private SemVer _corrected;
+        private List<string> _errors;
 
         public SemVerValidationResult Validate(SemVer semVer)
         {
