@@ -1,4 +1,4 @@
-namespace Appalachia.CI.SemVer.Tests
+namespace Appalachia.CI.SemVer
 {
     internal static class SuggestedRegEx
     {

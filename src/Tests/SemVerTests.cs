@@ -5,7 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Appalachia.CI.SemVer.Tests
+namespace Appalachia.CI.SemVer
 {
     [TestFixture]
     internal class SemVerTests
