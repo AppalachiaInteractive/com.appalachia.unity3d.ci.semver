@@ -12,6 +12,12 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| 98974c5e492b5dc6996aeeb64d87ae274951f08e | 2021-10-17 | Chris Schubert | Fixing package jsons |
+
+
+ ## Tag: `v0.1.5`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | 56a19c0bf247601bbe3149aa9f3f1d573d3a2a89 | 2021-10-16 | Chris Schubert | More project cleanup and refactoring |
 | daf4f4f0006883242bdd0a7d8741f6aadbeb80af | 2021-10-12 | Chris Schubert | Regernerating asmdef file |
 
