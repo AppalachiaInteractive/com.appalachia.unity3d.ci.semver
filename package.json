@@ -1,6 +1,6 @@
 {
   "name": "com.appalachia.unity3d.ci.semver",
-  "displayName": "Semver for Unity3D",
+  "displayName": "Appalachia.CI.Semver for Unity3D",
   "version": "0.1.5",
   "unity": "2020.3",
   "description": "Semantic Versioning 2.0 for Unity3D.",
@@ -11,7 +11,7 @@
   "category": "Tool",
   "license": "SEE LICENSE IN LICENSE.MD",
   "author": {
-    "name": "Appalachia Interactive & Artees"
+    "name": "Appalachia Interactive"
   },
   "dependencies": {},
   "repository": {
